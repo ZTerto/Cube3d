@@ -12,6 +12,24 @@
 
 #include "../include/cube3d.h"
 
+//20250603
+// Limpia la copia que usamos para la validación del mapa
+// main -> init_game_window -> map_validate -> validate_walls -> free_map_copy
+void	free_map_copy(char **map_copy)
+{
+	int	i;
+
+	i = 0;
+	if (!map_copy)
+		return;
+	while (map_copy[i])
+	{
+		free(map_copy[i]);
+		i++;
+	}
+	free(map_copy);
+}
+
 //20250528
 // Libera la estructura map
 // main -> mlx_key_hook -> handle_key -> cleanup_game -> free_map

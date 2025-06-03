@@ -84,6 +84,11 @@ void	init_game_window(t_game *game, char *map_path)
 		fprintf(stderr, "Error: map_parse\n");
 		exit(EXIT_FAILURE);
 	}
+	if (map_validate(&game->map) != 0)
+	{
+		fprintf(stderr, "Error: map_validate\n");
+		exit(EXIT_FAILURE);
+	}
 	print_map(&game->map);
 	init_mlx(game);
 	init_background(game);

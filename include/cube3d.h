@@ -54,9 +54,12 @@ typedef struct s_game
 // Init
 void	init_game_window(t_game *game, char *map_path);
 int		map_parse(t_map *map, char *map_path);
+int		map_validate(t_map *map);
+bool	validate_walls(char **map, int start_x, int start_y, int height);
 
 // Cleanup
 void	cleanup_game(t_game *game);
+void	free_map_copy(char **map_copy);
 
 // Debug (Borrar luego)
 void	print_map(t_map *map);
