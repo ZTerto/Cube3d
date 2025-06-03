@@ -57,7 +57,7 @@ static void flood_check(char **map, int x, int y, int *count, int *valid)
 	}
 	if (map[y][x] == '1' || map[y][x] == 'V')
 		return;
-	if (map[y][x] != '0' && map[y][x] != 'N' && map[y][x] != 'S' &&
+	if (map[y][x] != '0' && map[y][x] != 'N' && map[y][x] != 'S' && \
 		map[y][x] != 'E' && map[y][x] != 'W')
 	{
 		*valid = 1;

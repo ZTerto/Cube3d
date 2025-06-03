@@ -13,6 +13,33 @@
 #include "../include/cube3d.h"
 
 //20250603
+//Confirma que al menos hay un espacio junto al player para poder moverse
+// main -> init_game_window -> map_validate -> validate_space
+static int	validate_space(char **map)
+{
+	int i;
+	int j;
+	int valid;
+
+	i = 0;
+	valid = 1;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == '0')
+				valid = 0;
+			j++;
+		}
+		i++;
+	}
+	if (valid != 0)
+		return (fprintf(stderr, "Error: not enough space\n"), 1);
+	return (valid);
+}
+
+//20250603
 // Confirma la posición inicial del jugador en el mapa para hacer luego flood fill desde ahí
 // main -> init_game_window -> map_validate -> validate_player_start
 int	validate_player_start(char **map, int *x, int *y)
@@ -52,6 +79,8 @@ int	map_validate(t_map *map)
 	int	start_x;
 	int	start_y;
 
+	if (validate_space(map->complete_map))
+		return (1);
 	if (validate_player_start(map->complete_map, &start_x, &start_y) != 0)
 		return (1);
 	if (validate_walls(map->complete_map, start_x, start_y) != 0)

@@ -2,10 +2,11 @@ NO ./textures/wall_n.png
 SO ./textures/wall_s.png
 EA ./textures/wall_e.png
 WE ./textures/wall_w.png
-F 50,50,50
-C 18,18,18
+F 150,150,150
+C 125,125,125
 
-111111
-100001
+111011
+101111
 100N01
 111111
+loll
