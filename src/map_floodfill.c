@@ -73,7 +73,7 @@ static void flood_check(char **map, int x, int y, int *count, int *valid)
 //20250603
 // Valida que los muros cierren lanzando un floodfill desde dentro
 // main -> init_game_window -> map_validate -> validate_walls
-bool	validate_walls(char **map, int start_x, int start_y)
+int	validate_walls(char **map, int start_x, int start_y)
 {
 	char	**map_copy;
 	int		valid;
@@ -85,15 +85,15 @@ bool	validate_walls(char **map, int start_x, int start_y)
 	if (!map_copy)
 	{
 		fprintf(stderr, "Error: Failed to duplicate the map for wall validation.\n");
-		return (false);
+		return (1);
 	}
 	flood_check(map_copy, start_x, start_y, &count, &valid);
 	free_map_copy(map_copy);
 	if (valid != 0)
 	{
-		fprintf(stderr, "Error: Map is not closed by walls or contains open space near boundaries.\n");
-		return (false);
+		fprintf(stderr, "Error: Map is not closed by walls.\n");
+		return (1);
 	}
-	return (true);
+	return (0);
 }
 

@@ -12,7 +12,7 @@
 
 #include "../include/cube3d.h"
 
-// 20250603
+//20250603
 // Confirma la posición inicial del jugador en el mapa para hacer luego flood fill desde ahí
 // main -> init_game_window -> map_validate -> validate_player_start
 int	validate_player_start(char **map, int *x, int *y)
@@ -54,7 +54,7 @@ int	map_validate(t_map *map)
 
 	if (validate_player_start(map->complete_map, &start_x, &start_y) != 0)
 		return (1);
-	if (!validate_walls(map->complete_map, start_x, start_y))
+	if (validate_walls(map->complete_map, start_x, start_y) != 0)
 		return (1);
 	return (0);
 }
