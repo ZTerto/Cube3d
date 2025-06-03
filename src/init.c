@@ -80,16 +80,10 @@ void	init_game_window(t_game *game, char *map_path)
 
 	build_map_path(full_path, map_path, sizeof(full_path));
 	if (map_parse(&game->map, full_path) != 0)
-	{
-		fprintf(stderr, "Error: map_parse\n");
 		exit(EXIT_FAILURE);
-	}
-	if (map_validate(&game->map) != 0)
-	{
-		fprintf(stderr, "Error: map_validate\n");
-		exit(EXIT_FAILURE);
-	}
 	print_map(&game->map);
+	if (map_validate(&game->map) != 0)
+		exit(EXIT_FAILURE);
 	init_mlx(game);
 	init_background(game);
 }

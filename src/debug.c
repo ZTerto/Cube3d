@@ -14,6 +14,20 @@
 
 //20250527
 // Printea el mapa guardado (Indicando también sus dimensiones)
+void	print_map_copy(char **map)
+{
+	int y;
+
+	y = 0;
+	while (map && map[y])
+	{
+		printf("%s", map[y]);
+		y++;
+	}
+}
+
+//20250527
+// Printea el mapa guardado (Indicando también sus dimensiones)
 void	print_map(t_map *map)
 {
 	int y;

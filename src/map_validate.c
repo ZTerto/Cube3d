@@ -52,9 +52,9 @@ int	map_validate(t_map *map)
 	int	start_x;
 	int	start_y;
 
-	if (!validate_player_start(map->complete_map, &start_x, &start_y))
+	if (validate_player_start(map->complete_map, &start_x, &start_y) != 0)
 		return (1);
-	if (!validate_walls(map->complete_map, start_x, start_y, map->height))
+	if (!validate_walls(map->complete_map, start_x, start_y))
 		return (1);
 	return (0);
 }
