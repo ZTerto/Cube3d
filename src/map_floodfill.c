@@ -49,7 +49,6 @@ static void flood_check(char **map, int x, int y, int *count, int *valid)
 	if (*count >= 400 || *valid != 0)
 		return;
 	(*count)++;
-
 	if (map[y][x] == '\0' || map[y][x] == ' ')
 	{
 		*valid = 1;
@@ -84,14 +83,14 @@ int	validate_walls(char **map, int start_x, int start_y)
 	map_copy = duplicate_map(map);
 	if (!map_copy)
 	{
-		fprintf(stderr, "Error: Failed to duplicate the map for wall validation.\n");
+		fprintf(stderr, "Error: Failed to duplicate the map for validation.\n");
 		return (1);
 	}
 	flood_check(map_copy, start_x, start_y, &count, &valid);
 	free_map_copy(map_copy);
-	if (valid != 0)
+	if (valid != 0 || count < 5 || count > 399)
 	{
-		fprintf(stderr, "Error: Map is not closed by walls.\n");
+		fprintf(stderr, "Error: Map is not valid.\n");
 		return (1);
 	}
 	return (0);

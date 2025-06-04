@@ -39,4 +39,5 @@ void	print_map(t_map *map)
 		printf("%s", map->complete_map[y]);
 		y++;
 	}
+	printf("\n");
 }

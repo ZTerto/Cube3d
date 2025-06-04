@@ -12,6 +12,22 @@
 
 #include "../include/cube3d.h"
 
+//20250604
+// Limpia lo que tenga la estructura de mapa antes de usarla
+// main -> init_game_window -> init_map
+void	init_map(t_map *map)
+{
+	map->texture_no = NULL;
+	map->texture_so = NULL;
+	map->texture_we = NULL;
+	map->texture_ea = NULL;
+	map->color_floor = 0;
+	map->color_up = 0;
+	map->complete_map = NULL;
+	map->width = 0;
+	map->height = 0;
+}
+
 //20250527
 // Crea full_path con la ruta hasta maps/ y el nombre del mapa como argumento
 // main -> init_game_window -> build_map_path

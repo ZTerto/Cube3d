@@ -16,7 +16,8 @@ OBJS = $(CFILES:.c=.o)
 
 CUBE3D_FILES = 			src/main.c \
 						src/init.c \
-						src/map_parser.c \
+						src/map_parse.c \
+						src/map_parse_utils.c \
 						src/debug.c \
 						src/cleanup.c \
 						src/map_validate.c \

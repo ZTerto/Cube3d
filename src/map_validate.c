@@ -12,31 +12,32 @@
 
 #include "../include/cube3d.h"
 
-//20250603
-//Confirma que al menos hay un espacio junto al player para poder moverse
-// main -> init_game_window -> map_validate -> validate_space
-static int	validate_space(char **map)
+//20250604
+// Valida que los caracteres del mapa sean válidos
+// main -> init_game_window -> map_validate -> validate_characters
+int	validate_characters(char **map)
 {
-	int i;
-	int j;
-	int valid;
+	int y = 0;
+	int x;
 
-	i = 0;
-	valid = 1;
-	while (map[i])
+	while (map[y])
 	{
-		j = 0;
-		while (map[i][j])
+		x = 0;
+		while (map[y][x])
 		{
-			if (map[i][j] == '0')
-				valid = 0;
-			j++;
+				if (map[y][x] != '0' && map[y][x] != '1' && \
+					map[y][x] != 'N' && map[y][x] != 'S' && \
+					map[y][x] != 'E' && map[y][x] != 'W' && \
+					map[y][x] != ' ' && map[y][x] != '\n' && map[y][x] != '\r')
+				{
+					printf("Invalid char: '%c' (ascii %d) at [%d][%d]\n", map[y][x], map[y][x], y, x);
+					return (1);
+				}
+			x++;
 		}
-		i++;
+		y++;
 	}
-	if (valid != 0)
-		return (fprintf(stderr, "Error: not enough space\n"), 1);
-	return (valid);
+	return (0);
 }
 
 //20250603
@@ -79,7 +80,7 @@ int	map_validate(t_map *map)
 	int	start_x;
 	int	start_y;
 
-	if (validate_space(map->complete_map))
+	if (validate_characters(map->complete_map))
 		return (1);
 	if (validate_player_start(map->complete_map, &start_x, &start_y) != 0)
 		return (1);
