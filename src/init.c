@@ -21,8 +21,8 @@ void	init_map(t_map *map)
 	map->texture_so = NULL;
 	map->texture_we = NULL;
 	map->texture_ea = NULL;
-	map->color_floor = 0;
-	map->color_up = 0;
+	map->color_floor = 0xFFFFFFFF;
+	map->color_up = 0xFFFFFFFF;
 	map->complete_map = NULL;
 	map->width = 0;
 	map->height = 0;
@@ -31,7 +31,7 @@ void	init_map(t_map *map)
 //20250527
 // Crea full_path con la ruta hasta maps/ y el nombre del mapa como argumento
 // main -> init_game_window -> build_map_path
-void	build_map_path(char *dest, const char *filename, size_t size)
+static void	build_map_path(char *dest, const char *filename, size_t size)
 {
 	ft_strlcpy(dest, "maps/", size);
 	ft_strlcat(dest, filename, size);

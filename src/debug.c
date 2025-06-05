@@ -30,14 +30,21 @@ void	print_map_copy(char **map)
 // Printea el mapa guardado (Indicando también sus dimensiones)
 void	print_map(t_map *map)
 {
-	int y;
+	int y = 0;
 
-	y = 0;
-	printf("Mapa (%d x %d):\n", map->width, map->height);
-	while (map->complete_map && map->complete_map[y])
+	printf("\nMapa (%d x %d):\n", map->width, map->height);
+	while (y < map->height)
 	{
-		printf("%s", map->complete_map[y]);
+		printf("%s\n", map->complete_map[y]);
 		y++;
 	}
-	printf("\n");
+	printf("\n--- Texturas ---\n");
+	printf("NO: %s\n", map->texture_no);
+	printf("SO: %s\n", map->texture_so);
+	printf("WE: %s\n", map->texture_we);
+	printf("EA: %s\n", map->texture_ea);
+	printf("\n--- Colores ---\n");
+	printf("Floor:  0x%08X\n", map->color_floor);
+	printf("Ceiling: 0x%08X\n\n", map->color_up);
 }
+

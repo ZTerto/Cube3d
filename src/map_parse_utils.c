@@ -42,22 +42,39 @@ uint32_t	parse_rgb(const char *str)
 //20250527
 // Busca las texturas y colores para guardarls en la estructura
 // main -> init_game_window -> map_parse -> parse_texture_colors
-int		parse_texture_colors(t_map *map, char *line)
+int	parse_texture_colors(t_map *map, char *line)
 {
-	if (!ft_strncmp(line, "NO ", 3))
-		map->texture_no = ft_strdup(line + 3);
-	else if (!ft_strncmp(line, "SO ", 3))
-		map->texture_so = ft_strdup(line + 3);
-	else if (!ft_strncmp(line, "WE ", 3))
-		map->texture_we = ft_strdup(line + 3);
-	else if (!ft_strncmp(line, "EA ", 3))
-		map->texture_ea = ft_strdup(line + 3);
-	else if (!ft_strncmp(line, "F ", 2))
+	char *clean;
+
+	while (*line == ' ' || *line == '\t') // Trim izquierda
+		line++;
+	if (!ft_strncmp(line, "NO ", 3) && !map->texture_no)
+	{
+		clean = ft_strtrim(line + 3, " \n");
+		map->texture_no = clean;
+	}
+	else if (!ft_strncmp(line, "SO ", 3) && !map->texture_so)
+	{
+		clean = ft_strtrim(line + 3, " \n");
+		map->texture_so = clean;
+	}
+	else if (!ft_strncmp(line, "WE ", 3) && !map->texture_we)
+	{
+		clean = ft_strtrim(line + 3, " \n");
+		map->texture_we = clean;
+	}
+	else if (!ft_strncmp(line, "EA ", 3) && !map->texture_ea)
+	{
+		clean = ft_strtrim(line + 3, " \n");
+		map->texture_ea = clean;
+	}
+	else if (!ft_strncmp(line, "F ", 2) && map->color_floor == 0xFFFFFFFF)
 		map->color_floor = parse_rgb(line + 2);
-	else if (!ft_strncmp(line, "C ", 2))
+	else if (!ft_strncmp(line, "C ", 2) && map->color_up == 0xFFFFFFFF)
 		map->color_up = parse_rgb(line + 2);
 	else
 		return (0);
 	return (1);
 }
+
 
