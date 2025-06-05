@@ -82,6 +82,8 @@ int	map_validate(t_map *map)
 
 	if (validate_characters(map->complete_map))
 		return (1);
+	if (validate_colors_and_textures(map) != 0)
+		return (1);
 	if (validate_player_start(map->complete_map, &start_x, &start_y) != 0)
 		return (1);
 	if (validate_walls(map->complete_map, start_x, start_y) != 0)

@@ -63,6 +63,7 @@ int			parse_texture_colors(t_map *map, char *line);
 // Validation
 int			map_validate(t_map *map);
 int			validate_walls(char **map, int start_x, int start_y);
+int			validate_colors_and_textures(t_map *map);
 
 // Cleanup
 void		cleanup_game(t_game *game);

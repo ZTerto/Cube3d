@@ -21,6 +21,7 @@ CUBE3D_FILES = 			src/main.c \
 						src/debug.c \
 						src/cleanup.c \
 						src/map_validate.c \
+						src/map_validate_utils.c \
 						src/map_floodfill.c
 
 GET_NEXT_LINE_FILES = 	src/get_next_line/get_next_line.c\
