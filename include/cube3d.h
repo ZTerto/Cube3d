@@ -52,13 +52,26 @@ typedef struct s_game
 }	t_game;
 
 // Init
-void	init_game_window(t_game *game, char *map_path);
-int		map_parse(t_map *map, char *map_path);
+void		init_game_window(t_game *game, char *map_path);
+void		init_map(t_map *map);
+int			map_setup(t_map *map, const char *map_name, char *full_path, size_t max_len);
+
+// Parse
+int			map_parse(t_map *map, char *map_path);
+uint32_t	parse_rgb(const char *str);
+int			parse_texture_colors(t_map *map, char *line);
+
+// Validation
+int			map_validate(t_map *map);
+int			validate_walls(char **map, int start_x, int start_y);
+int			validate_colors_and_textures(t_map *map);
 
 // Cleanup
-void	cleanup_game(t_game *game);
+void		cleanup_game(t_game *game);
+void		free_map_copy(char **map_copy);
 
 // Debug (Borrar luego)
-void	print_map(t_map *map);
+void		print_map(t_map *map);
+void		print_map_copy(char **map);
 
 #endif

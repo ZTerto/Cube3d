@@ -15,7 +15,7 @@
 //20250528
 // Gestiona la pulsación de teclas, ahora mismo saca del juego con escape
 // main -> mlx_key_hook -> handle_key
-void	handle_key(mlx_key_data_t keydata, void *param)
+static void	handle_key(mlx_key_data_t keydata, void *param)
 {
 	t_game *game = (t_game *)param;
 
@@ -46,4 +46,5 @@ int main(void)
 	mlx_t *mlx = mlx_init(400, 400, "test", true);
 	mlx_terminate(mlx);
 	return 0;
-}*/
+}
+*/

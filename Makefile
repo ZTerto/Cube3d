@@ -16,9 +16,14 @@ OBJS = $(CFILES:.c=.o)
 
 CUBE3D_FILES = 			src/main.c \
 						src/init.c \
-						src/map_parser.c \
 						src/debug.c \
-						src/cleanup.c
+						src/cleanup.c \
+						src/map_setup.c \
+						src/map_parse.c \
+						src/map_parse_utils.c \
+						src/map_validate.c \
+						src/map_validate_utils.c \
+						src/map_floodfill.c
 
 GET_NEXT_LINE_FILES = 	src/get_next_line/get_next_line.c\
 						src/get_next_line/get_next_line_utils.c
@@ -77,6 +82,11 @@ test: re
 	@./$(NAME) $(filter-out $@,$(MAKECMDGOALS))
 
 valgrind: re
+	valgrind ./$(NAME) $(filter-out $@,$(MAKECMDGOALS)) > valgrind_out.txt 2>&1
+	grep -A20 "definitely lost" valgrind_out.txt > valgrind_out_def.txt
+	@cat valgrind_out_def.txt
+
+valgrind+: re
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes \
 		./$(NAME) $(filter-out $@,$(MAKECMDGOALS)) > valgrind_out.txt 2>&1
 	grep -A20 "definitely lost" valgrind_out.txt > valgrind_out_def.txt
