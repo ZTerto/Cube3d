@@ -95,6 +95,8 @@ void	init_game_window(t_game *game, char *map_path)
 	char	full_path[256];
 
 	build_map_path(full_path, map_path, sizeof(full_path));
+	if (validate_map_path(full_path) != 0)
+		exit(EXIT_FAILURE);
 	if (map_parse(&game->map, full_path) != 0)
 		exit(EXIT_FAILURE);
 	print_map(&game->map);

@@ -6,7 +6,7 @@
 /*   By: ajodar <ajodar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:26:58 by ajodar            #+#    #+#             */
-/*   Updated: 2025/06/05 11:32:17 by ajodar           ###   ########.fr       */
+/*   Updated: 2025/06/07 10:42:42 by ajodar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ static int	validate_rgb_format(uint32_t color, const char *label)
 
 	if (a != 0xFF)
 	{
-		printf("Error: %s alpha no válido (esperado 0xFF): %02X\n", label, a);
+		printf("Error: %s alpha not valid: %02X\n", label, a);
 		return (0);
 	}
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 	{
-		printf("Error: %s color fuera de rango: (%d,%d,%d)\n", label, r, g, b);
+		printf("Error: %s color out of range: (%d,%d,%d)\n", label, r, g, b);
 		return (0);
 	}
 	return (1);

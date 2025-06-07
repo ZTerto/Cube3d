@@ -1,14 +1,13 @@
-NO ./textures/wall_n.png
-SO ./textures/wall_s.png
+NO   ./textures/wall-bricks-Blue.png
+SO    ./textures/wall-bricks-Blue.png
 
 
-WE ./textures/wall_w.png
-F 0,0,0
+WE ./textures/wall-bricks-Blue.png
+F 0,  0, 0
 
-C 255,255,255
+C  255,255, 255
 
-EA ./textures/wall_e.png
-
+EA ./textures/wall-bricks-Blue.png
 
   111111 
  100N011 

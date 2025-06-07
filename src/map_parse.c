@@ -102,10 +102,10 @@ int	extract_textures_colors_maps(t_map *map, char **tmp_map, int *width, int *ma
 				(*map_lines)++;
 			}
 			else
-				free(line); // línea sin nada
+				free(line);
 		}
 		else
-			free(line); // ya parseada como textura o color
+			free(line);
 	}
 	return (0);
 }

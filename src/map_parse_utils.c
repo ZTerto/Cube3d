@@ -12,6 +12,41 @@
 
 #include "../include/cube3d.h"
 
+//20250607
+// Limpia la textura de espacios, tabulaciones y salto ants de guardarla
+// main -> init_game_window -> map_parse -> parse_texture_colors -> parse_texture -> clean_texture
+static int	clean_texture(char **texture_field, const char *prefix, char *line)
+{
+	char *clean;
+
+	if (*texture_field != NULL)
+		return (0);
+	clean = ft_strtrim(line + ft_strlen(prefix), " \t\n\r");
+	if (!clean)
+		return (0);
+	*texture_field = clean;
+	return (1);
+}
+
+//20250607
+// main -> init_game_window -> map_parse -> parse_texture_colors -> parse_texture
+static int	parse_texture(t_map *map, char *line)
+{
+	while (*line == ' ' || *line == '\t')
+		line++;
+
+	if (!ft_strncmp(line, "NO ", 3))
+		return clean_texture(&map->texture_no, "NO ", line);
+	if (!ft_strncmp(line, "SO ", 3))
+		return clean_texture(&map->texture_so, "SO ", line);
+	if (!ft_strncmp(line, "WE ", 3))
+		return clean_texture(&map->texture_we, "WE ", line);
+	if (!ft_strncmp(line, "EA ", 3))
+		return clean_texture(&map->texture_ea, "EA ", line);
+
+	return (0);
+}
+
 //20250527
 // Guarda los colores con un formato que pueda leer mlx
 // main -> init_game_window -> map_parse -> parse_texture_colors -> parse_rgb
@@ -30,39 +65,6 @@ uint32_t	parse_rgb(const char *str)
 		free(split[i++]);
 	free(split);
 	return (r << 24) | (g << 16) | (b << 8) | 0xFF;
-}
-
-//20250605
-// main -> init_game_window -> map_parse -> parse_texture_colors -> parse_texture
-static int	parse_texture(t_map *map, char *line)
-{
-	char *clean;
-
-	while (*line == ' ' || *line == '\t')
-		line++;
-	if (!ft_strncmp(line, "NO ", 3) && !map->texture_no)
-	{
-		clean = ft_strtrim(line + 3, " \t\n\r");
-		map->texture_no = clean;
-	}
-	else if (!ft_strncmp(line, "SO ", 3) && !map->texture_so)
-	{
-		clean = ft_strtrim(line + 3, " \t\n\r");
-		map->texture_so = clean;
-	}
-	else if (!ft_strncmp(line, "WE ", 3) && !map->texture_we)
-	{
-		clean = ft_strtrim(line + 3, " \t\n\r");
-		map->texture_we = clean;
-	}
-	else if (!ft_strncmp(line, "EA ", 3) && !map->texture_ea)
-	{
-		clean = ft_strtrim(line + 3, " \t\n\r");
-		map->texture_ea = clean;
-	}
-	else
-		return (0);
-	return (1);
 }
 
 //20250605

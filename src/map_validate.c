@@ -12,6 +12,30 @@
 
 #include "../include/cube3d.h"
 
+//20250607
+// Valida la ruta del mapa
+// main -> init_game_window -> validate_map_path
+int	validate_map_path(const char *path)
+{
+	int		len;
+	int		fd;
+
+	len = ft_strlen(path);
+	if (len < 5 || ft_strncmp(path + len - 4, ".cub", 4) != 0)
+	{
+		printf("Error: map dont have extension .cub\n");
+		return (1);
+	}
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+	{
+		perror("Error: open the map");
+		return (1);
+	}
+	close(fd);
+	return (0);
+}
+
 //20250604
 // Valida que los caracteres del mapa sean válidos
 // main -> init_game_window -> map_validate -> validate_characters
@@ -80,7 +104,7 @@ int	map_validate(t_map *map)
 	int	start_x;
 	int	start_y;
 
-	if (validate_characters(map->complete_map))
+	if (validate_characters(map->complete_map) != 0)
 		return (1);
 	if (validate_colors_and_textures(map) != 0)
 		return (1);
