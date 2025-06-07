@@ -12,31 +12,6 @@
 
 #include "../include/cube3d.h"
 
-//20250604
-// Limpia lo que tenga la estructura de mapa antes de usarla
-// main -> init_game_window -> init_map
-void	init_map(t_map *map)
-{
-	map->texture_no = NULL;
-	map->texture_so = NULL;
-	map->texture_we = NULL;
-	map->texture_ea = NULL;
-	map->color_floor = 0xFFFFFFFF;
-	map->color_up = 0xFFFFFFFF;
-	map->complete_map = NULL;
-	map->width = 0;
-	map->height = 0;
-}
-
-//20250527
-// Crea full_path con la ruta hasta maps/ y el nombre del mapa como argumento
-// main -> init_game_window -> build_map_path
-static void	build_map_path(char *dest, const char *filename, size_t size)
-{
-	ft_strlcpy(dest, "maps/", size);
-	ft_strlcat(dest, filename, size);
-}
-
 //20250527
 // Inicia la pantallita de mlx y su ventana
 // main -> init_game_window -> init_mlx
@@ -69,8 +44,9 @@ static void	init_mlx(t_game *game)
 static void	init_background(t_game *game)
 {
 	uint32_t	color;
-	int			y = 0;
+	int			y;
 
+	y = 0;
 	while (y < HEIGHT)
 	{
 		int x = 0;
@@ -94,14 +70,12 @@ void	init_game_window(t_game *game, char *map_path)
 {
 	char	full_path[256];
 
-	build_map_path(full_path, map_path, sizeof(full_path));
-	if (validate_map_path(full_path) != 0)
+	if (map_setup(&game->map, map_path, full_path, sizeof(full_path)) != 0)
 		exit(EXIT_FAILURE);
-	if (map_parse(&game->map, full_path) != 0)
-		exit(EXIT_FAILURE);
-	print_map(&game->map);
+	print_map(&game->map); // Debugeo de la estructura map (Borrar al final)
 	if (map_validate(&game->map) != 0)
 		exit(EXIT_FAILURE);
 	init_mlx(game);
 	init_background(game);
 }
+

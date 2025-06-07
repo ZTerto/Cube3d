@@ -46,4 +46,5 @@ int main(void)
 	mlx_t *mlx = mlx_init(400, 400, "test", true);
 	mlx_terminate(mlx);
 	return 0;
-}*/
+}
+*/

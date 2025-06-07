@@ -14,7 +14,7 @@
 
 //20250604
 // main -> init_game_window -> map_parse -> pad_map_lines -> sanitize_line
-char	*sanitize_line(const char *src, int width)
+static char	*sanitize_line(const char *src, int width)
 {
 	int 	i;
 	char	c;
@@ -65,7 +65,7 @@ static void	pad_map_lines(char **map_lines, int total_lines, int width)
 //20250604
 // Ignora las líneas que no tengan información útil
 // main -> init_game_window -> map_parse -> extract_textures_colors_maps -> is_line_empty
-int	is_valid_map_line(const char *line)
+static int	is_valid_map_line(const char *line)
 {
 	while (*line == ' ' || *line == '\t')
 		line++;
@@ -81,7 +81,7 @@ int	is_valid_map_line(const char *line)
 //20250604
 // Completa la estructura map con texturas, colores y el array
 // main -> init_game_window -> map_parse -> extract_textures_colors_maps
-int	extract_textures_colors_maps(t_map *map, char **tmp_map, int *width, int *map_lines, int fd)
+static int	extract_textures_colors_maps(t_map *map, char **tmp_map, int *width, int *map_lines, int fd)
 {
 	char	*line;
 	size_t	len;
