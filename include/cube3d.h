@@ -53,17 +53,28 @@ typedef struct s_player {
 
 typedef struct s_game
 {
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-	t_map		map;
-	t_player	player;
+	mlx_t			*mlx;
+	mlx_image_t		*img;
+	t_map			map;
+	t_player		player;
+
+	// Nuevas texturas cargadas
+	mlx_texture_t	*tex_no;
+	mlx_texture_t	*tex_so;
+	mlx_texture_t	*tex_we;
+	mlx_texture_t	*tex_ea;
 }	t_game;
+
 
 // Init
 void		init_game_window(t_game *game, char *map_path);
 void		init_map(t_map *map);
 int			map_setup(t_map *map, char *map_name);
 void		init_player(t_game *game);
+void		init_background(t_game *game);
+
+// Handle_keys
+void		handle_key(mlx_key_data_t keydata, void *param);
 
 // Parse
 int			map_parse(t_map *map, char *map_path);

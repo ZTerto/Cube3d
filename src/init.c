@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
+#include "../include/raycasting.h"
 
 //20250527
 // Inicia la pantallita de mlx y su ventana
@@ -41,7 +42,7 @@ static void	init_mlx(t_game *game)
 //20250527
 // Busca los colores asignados y pinta el suelo y el cielo
 // main -> init_game_window -> init_background
-static void	init_background(t_game *game)
+void	init_background(t_game *game)
 {
 	uint32_t	color;
 	int			y;
@@ -77,6 +78,7 @@ void	init_game_window(t_game *game, char *map_path)
 	print_map(&game->map); // Debug temporal
 	map_validate(&game->map);
 	init_player(game);
+	rc_setup(game);
 	init_mlx(game);
 	init_background(game);
 }

@@ -46,7 +46,7 @@ static char	**duplicate_map(char **map)
 // main -> init_game_window -> map_validate -> validate_walls -> flood_check
 static void flood_check(char **map, int x, int y, int *count, int *valid)
 {
-	if (*count >= 400 || *valid != 0)
+	if (*count >= 4000 || *valid != 0)
 		return;
 	(*count)++;
 	if (map[y][x] == '\0' || map[y][x] == ' ')
@@ -88,7 +88,7 @@ int	validate_walls(char **map, int start_x, int start_y)
 	}
 	flood_check(map_copy, start_x, start_y, &count, &valid);
 	free_map_copy(map_copy);
-	if (valid != 0 || count < 5 || count > 399)
+	if (valid != 0 || count < 5 || count > 3999)
 	{
 		fprintf(stderr, "Error: Map is not valid.\n");
 		return (1);

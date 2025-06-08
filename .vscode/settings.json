@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "mlx42.h": "c"
+        "mlx42.h": "c",
+        "cube3d.h": "c",
+        "raycasting.h": "c"
     }
 }

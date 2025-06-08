@@ -3,15 +3,15 @@ SO    ./textures/wall-bricks-Blue.png
 
 
 WE ./textures/wall-bricks-Blue.png
-F 0,  0, 0
+F 30,60,90
 
-C  255,255, 255
+C 70,130,180
 
 EA ./textures/wall-bricks-Blue.png
 
   111111 
- 100N011 
+ 10000011 
   1100001
- 1100001 
+ 1100N01 
   1100001
    11111 

@@ -11,29 +11,18 @@
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
-
-//20250528
-// Gestiona la pulsación de teclas, ahora mismo saca del juego con escape
-// main -> mlx_key_hook -> handle_key
-static void	handle_key(mlx_key_data_t keydata, void *param)
-{
-	t_game *game = (t_game *)param;
-
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-	{
-		cleanup_game(game);
-		exit(EXIT_SUCCESS);
-	}
-}
+#include "../include/raycasting.h"
 
 //20250527
 int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	(void)argc;
+	if (argc != 2)
+		return (1);
 	init_game_window(&game, argv[1]);
 	mlx_key_hook(game.mlx, handle_key, &game);
+	mlx_loop_hook(game.mlx, render, &game);
 	mlx_loop(game.mlx);
 	return (EXIT_SUCCESS);
 }
