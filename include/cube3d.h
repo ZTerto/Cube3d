@@ -23,7 +23,6 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <string.h>
-# include <math.h>
 
 // Cons
 # define WIDTH 800
@@ -38,7 +37,6 @@ typedef struct s_map {
 	char		*texture_ea;
 	uint32_t	color_floor;
 	uint32_t	color_up;
-
 	char		**complete_map;
 	int			width;
 	int			height;
@@ -60,7 +58,6 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 }	t_game;
-
 
 // Init
 void		init_game_window(t_game *game, char *map_path);
