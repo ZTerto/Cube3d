@@ -6,69 +6,84 @@
 /*   By: ajodar <ajodar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 14:02:17 by ajodar            #+#    #+#             */
-/*   Updated: 2025/06/08 14:04:24 by ajodar           ###   ########.fr       */
+/*   Updated: 2025/06/08 18:26:40 by ajodar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
 #include "../include/raycasting.h"
 
-//20250528
-// Gestiona la pulsación de teclas, ahora mismo saca del juego con escape
+//20250608
+// main -> mlx_key_hook -> handle_key -> handle_scape
+static void	handle_escape(mlx_key_data_t keydata, t_game *game)
+{
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+	{
+		cleanup_game(game);
+		exit(EXIT_SUCCESS);
+	}
+}
+
+//20250608
+// main -> mlx_key_hook -> handle_key -> handle_movement
+static void	handle_movement(t_game *game, mlx_key_data_t keydata, double move_speed)
+{
+	double next_x;
+	double next_y;
+
+	if (keydata.key == MLX_KEY_W)
+	{
+		next_x = game->player.x + game->player.dir_x * move_speed;
+		next_y = game->player.y + game->player.dir_y * move_speed;
+	}
+	else if (keydata.key == MLX_KEY_S)
+	{
+		next_x = game->player.x - game->player.dir_x * move_speed;
+		next_y = game->player.y - game->player.dir_y * move_speed;
+	}
+	else
+		return ;
+	if (game->map.complete_map[(int)next_y][(int)game->player.x] != '1')
+		game->player.y = next_y;
+	if (game->map.complete_map[(int)game->player.y][(int)next_x] != '1')
+		game->player.x = next_x;
+	start_ui_anim(game);
+}
+
+//20250608
+// main -> mlx_key_hook -> handle_key -> handle_rotation
+static void	handle_rotation(t_game *game, mlx_key_data_t keydata)
+{
+	double rot_speed;
+	double old_dir_x;
+	double old_plane_x;
+
+	if (keydata.key == MLX_KEY_D)
+		rot_speed = 0.05;
+	else if (keydata.key == MLX_KEY_A)
+		rot_speed = -0.05;
+	else
+		return ;
+	old_dir_x = game->player.dir_x;
+	game->player.dir_x = game->player.dir_x * cos(rot_speed) - game->player.dir_y * sin(rot_speed);
+	game->player.dir_y = old_dir_x * sin(rot_speed) + game->player.dir_y * cos(rot_speed);
+	old_plane_x = game->player.plane_x;
+	game->player.plane_x = game->player.plane_x * cos(rot_speed) - game->player.plane_y * sin(rot_speed);
+	game->player.plane_y = old_plane_x * sin(rot_speed) + game->player.plane_y * cos(rot_speed);
+	start_ui_anim(game);
+}
+
+//20250608
+// Gestiona la salida del programa con scape, el movimiento, rotación y animación de la interfaz
 // main -> mlx_key_hook -> handle_key
 void	handle_key(mlx_key_data_t keydata, void *param)
 {
 	t_game *game = (t_game *)param;
 	double move_speed = 0.05;
 
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-	{
-		cleanup_game(game);
-		exit(EXIT_SUCCESS);
-	}
+	handle_escape(keydata, game);
 	if (keydata.action != MLX_PRESS && keydata.action != MLX_REPEAT)
 		return;
-
-	if (keydata.key == MLX_KEY_W)
-	{
-		double next_x = game->player.x + game->player.dir_x * move_speed;
-		double next_y = game->player.y + game->player.dir_y * move_speed;
-
-		if (game->map.complete_map[(int)next_y][(int)game->player.x] != '1')
-			game->player.y = next_y;
-		if (game->map.complete_map[(int)game->player.y][(int)next_x] != '1')
-			game->player.x = next_x;
-	}
-	if (keydata.key == MLX_KEY_S)
-	{
-		double next_x = game->player.x - game->player.dir_x * move_speed;
-		double next_y = game->player.y - game->player.dir_y * move_speed;
-
-		if (game->map.complete_map[(int)next_y][(int)game->player.x] != '1')
-			game->player.y = next_y;
-		if (game->map.complete_map[(int)game->player.y][(int)next_x] != '1')
-			game->player.x = next_x;
-	}
-		if (keydata.key == MLX_KEY_D)
-	{
-		double rot_speed = 0.05;
-		double old_dir_x = game->player.dir_x;
-		game->player.dir_x = game->player.dir_x * cos(rot_speed) - game->player.dir_y * sin(rot_speed);
-		game->player.dir_y = old_dir_x * sin(rot_speed) + game->player.dir_y * cos(rot_speed);
-
-		double old_plane_x = game->player.plane_x;
-		game->player.plane_x = game->player.plane_x * cos(rot_speed) - game->player.plane_y * sin(rot_speed);
-		game->player.plane_y = old_plane_x * sin(rot_speed) + game->player.plane_y * cos(rot_speed);
-	}
-	if (keydata.key == MLX_KEY_A)
-	{
-		double rot_speed = -0.05;
-		double old_dir_x = game->player.dir_x;
-		game->player.dir_x = game->player.dir_x * cos(rot_speed) - game->player.dir_y * sin(rot_speed);
-		game->player.dir_y = old_dir_x * sin(rot_speed) + game->player.dir_y * cos(rot_speed);
-
-		double old_plane_x = game->player.plane_x;
-		game->player.plane_x = game->player.plane_x * cos(rot_speed) - game->player.plane_y * sin(rot_speed);
-		game->player.plane_y = old_plane_x * sin(rot_speed) + game->player.plane_y * cos(rot_speed);
-	}
+	handle_movement(game, keydata, move_speed);
+	handle_rotation(game, keydata);
 }

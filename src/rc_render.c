@@ -6,11 +6,15 @@
 /*   By: ajodar <ajodar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:39:59 by ajodar            #+#    #+#             */
-/*   Updated: 2025/06/08 14:12:28 by ajodar           ###   ########.fr       */
+/*   Updated: 2025/06/08 18:17:27 by ajodar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/raycasting.h"
+
+//20250608
+// Esta página ha sido practicamente generada por IA para ayudarme a gestionar las animaciones con raycasting
+// No es como se va a gestionar raycasting en principio
 
 //20250608
 // main -> render -> rc_render_frame -> cast_ray -> setup_ray -> init_ray_direction

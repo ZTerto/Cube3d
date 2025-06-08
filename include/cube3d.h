@@ -51,19 +51,26 @@ typedef struct s_player {
 	double plane_y;
 }	t_player;
 
+typedef struct s_ui_anim {
+	mlx_texture_t	*frames[4];     // ← tus PNGs
+	mlx_image_t		*img;           // ← imagen visible actual
+	int				frame_count;    // ← total de frames
+	int				current_frame;  // ← índice actual
+	bool			is_animating;   // ← flag para control
+}	t_ui_anim;
 typedef struct s_game
 {
 	mlx_t			*mlx;
 	mlx_image_t		*img;
 	t_map			map;
 	t_player		player;
-
-	// Nuevas texturas cargadas
 	mlx_texture_t	*tex_no;
 	mlx_texture_t	*tex_so;
 	mlx_texture_t	*tex_we;
 	mlx_texture_t	*tex_ea;
+	t_ui_anim		ui;
 }	t_game;
+
 
 
 // Init
@@ -75,6 +82,11 @@ void		init_background(t_game *game);
 
 // Handle_keys
 void		handle_key(mlx_key_data_t keydata, void *param);
+
+// UI animation
+void		load_ui_frames(t_game *game);
+void		ui_update(void *param);
+void		start_ui_anim(t_game *game);
 
 // Parse
 int			map_parse(t_map *map, char *map_path);
