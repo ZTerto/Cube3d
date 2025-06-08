@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_init.c                                         :+:      :+:    :+:   */
+/*   map_setup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajodar <ajodar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 11:03:45 by ajodar            #+#    #+#             */
-/*   Updated: 2025/06/07 11:17:24 by ajodar           ###   ########.fr       */
+/*   Updated: 2025/06/08 11:54:41 by ajodar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,15 @@ static void	build_map_path(char *dest, const char *filename, size_t size)
 //20250607
 // Crea la ruta completa al mapa, valida y parsea todo a la estructura map
 // main -> init_game_window -> map_setup
-int	map_setup(t_map *map, const char *map_name, char *full_path, size_t max_len)
+int	map_setup(t_map *map, char *map_name)
 {
-	build_map_path(full_path, map_name, max_len);
+	char	full_path[256];
+
+	build_map_path(full_path, map_name, sizeof(full_path));
 	if (validate_map_path(full_path) != 0)
-		return (1);
+		exit(EXIT_FAILURE);
 	if (map_parse(map, full_path) != 0)
-		return (1);
+		exit(EXIT_FAILURE);
 	return (0);
 }
+

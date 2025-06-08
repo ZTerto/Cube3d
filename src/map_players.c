@@ -6,13 +6,14 @@
 /*   By: ajodar <ajodar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 11:08:25 by ajodar            #+#    #+#             */
-/*   Updated: 2025/06/08 11:33:53 by ajodar           ###   ########.fr       */
+/*   Updated: 2025/06/08 12:12:25 by ajodar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
 
-static void	set_player_direction(t_player *p, char dir)
+//20250608
+static void	set_player_direction_vertical(t_player *p, char dir)
 {
 	if (dir == 'N')
 	{
@@ -28,7 +29,12 @@ static void	set_player_direction(t_player *p, char dir)
 		p->plane_x = -0.66;
 		p->plane_y = 0;
 	}
-	else if (dir == 'E')
+}
+
+//20250608
+static void	set_player_direction_horizontal(t_player *p, char dir)
+{
+	if (dir == 'E')
 	{
 		p->dir_x = 1;
 		p->dir_y = 0;
@@ -44,6 +50,16 @@ static void	set_player_direction(t_player *p, char dir)
 	}
 }
 
+//20250608
+static void	set_player_direction(t_player *p, char dir)
+{
+	if (dir == 'N' || dir == 'S')
+		set_player_direction_vertical(p, dir);
+	else if (dir == 'E' || dir == 'W')
+		set_player_direction_horizontal(p, dir);
+}
+
+//20250608
 static void	set_player_position(t_game *game, int x, int y, char dir)
 {
 	game->player.x = x + 0.5;
@@ -52,7 +68,10 @@ static void	set_player_position(t_game *game, int x, int y, char dir)
 	game->map.complete_map[y][x] = '0';
 }
 
-static void	init_player(t_game *game)
+//20250608
+// Gestiona los datos de posición y vistas del jugador en el mapa
+// main -> init_game_window -> init_player
+void	init_player(t_game *game)
 {
 	int		y;
 	int		x;
