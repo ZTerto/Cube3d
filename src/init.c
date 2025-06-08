@@ -63,18 +63,20 @@ static void	init_background(t_game *game)
 	}
 }
 
-//20250527
-// Inicializa MLX, saca la pantalla y pinta fondos
+//202500608
+// (PARSE) map_setup: Realiza el parse a las estructuras del mapa
+// (PARSE) print_map: Imprime en pantalla todo lo parseado del mapa
+// (PARSE) map_validate: si algo parseado del mapa no es válido, cierra todo
+// (PARSE) init_player: completa los valores de la estructura player
+// (MLX) init_mlx: Inicia MLX
+// (MLX) init_background: pinta el fondo de los 2 colores parseados antes
 // main -> init_game_window
 void	init_game_window(t_game *game, char *map_path)
 {
-	char	full_path[256];
-
-	if (map_setup(&game->map, map_path, full_path, sizeof(full_path)) != 0)
-		exit(EXIT_FAILURE);
-	print_map(&game->map); // Debugeo de la estructura map (Borrar al final)
-	if (map_validate(&game->map) != 0)
-		exit(EXIT_FAILURE);
+	map_setup(&game->map, map_path);
+	print_map(&game->map); // Debug temporal
+	map_validate(&game->map);
+	init_player(game);
 	init_mlx(game);
 	init_background(game);
 }

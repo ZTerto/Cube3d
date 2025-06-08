@@ -23,7 +23,8 @@ CUBE3D_FILES = 			src/main.c \
 						src/map_parse_utils.c \
 						src/map_validate.c \
 						src/map_validate_utils.c \
-						src/map_floodfill.c
+						src/map_floodfill.c \
+						src/map_players.c
 
 GET_NEXT_LINE_FILES = 	src/get_next_line/get_next_line.c\
 						src/get_next_line/get_next_line_utils.c
