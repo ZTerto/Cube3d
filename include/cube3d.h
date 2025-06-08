@@ -16,6 +16,7 @@
 # include "MLX42/MLX42.h"
 # include "../src/libft/libft.h"
 # include "../src/get_next_line/get_next_line.h"
+# include "raycasting.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <stdbool.h>
@@ -23,15 +24,15 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <string.h>
+# include <math.h>
 
 // Cons
-# define WIDTH 1280
-# define HEIGHT 720
+# define WIDTH 800
+# define HEIGHT 600
 # define FOV 60.0
 
 // Structs
-typedef struct s_map
-{
+typedef struct s_map {
 	char		*texture_no;
 	char		*texture_so;
 	char		*texture_we;
@@ -44,12 +45,23 @@ typedef struct s_map
 	int			height;
 }	t_map;
 
+typedef struct s_player {
+	double x;
+	double y;
+	double dir_x;
+	double dir_y;
+	double plane_x;
+	double plane_y;
+}	t_player;
+
 typedef struct s_game
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 	t_map		map;
+	t_player	player;
 }	t_game;
+
 
 // Init
 void		init_game_window(t_game *game, char *map_path);

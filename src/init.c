@@ -75,6 +75,7 @@ void	init_game_window(t_game *game, char *map_path)
 	print_map(&game->map); // Debugeo de la estructura map (Borrar al final)
 	if (map_validate(&game->map) != 0)
 		exit(EXIT_FAILURE);
+	init_player(game);
 	init_mlx(game);
 	init_background(game);
 }
