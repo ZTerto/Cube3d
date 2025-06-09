@@ -28,7 +28,8 @@ int	validate_characters(char **map)
 				if (map[y][x] != '0' && map[y][x] != '1' && \
 					map[y][x] != 'N' && map[y][x] != 'S' && \
 					map[y][x] != 'E' && map[y][x] != 'W' && \
-					map[y][x] != ' ' && map[y][x] != '\n' && map[y][x] != '\r')
+					map[y][x] != ' ' && map[y][x] != '\n' && \
+					map[y][x] != '\r')
 				{
 					printf("Invalid char: '%c' (ascii %d) at [%d][%d]\n", map[y][x], map[y][x], y, x);
 					return (1);

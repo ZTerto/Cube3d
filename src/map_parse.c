@@ -27,9 +27,9 @@ static char	*sanitize_line(const char *src, int width)
 	while (src[i] && i < width)
 	{
 		c = src[i];
-		if (c == '0' || c == '1' ||
-			c == 'N' || c == 'S' ||
-			c == 'E' || c == 'W' ||
+		if (c == '0' || c == '1' || \
+			c == 'N' || c == 'S' || \
+			c == 'E' || c == 'W' || \
 			c == ' ')
 			dst[i] = c;
 		else

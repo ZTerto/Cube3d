@@ -52,11 +52,11 @@ typedef struct s_player {
 }	t_player;
 
 typedef struct s_ui_anim {
-	mlx_texture_t	*frames[4];     // ← tus PNGs
-	mlx_image_t		*img;           // ← imagen visible actual
-	int				frame_count;    // ← total de frames
-	int				current_frame;  // ← índice actual
-	bool			is_animating;   // ← flag para control
+	mlx_texture_t	*frames[4];
+	mlx_image_t		*img;
+	int				frame_count;
+	int				current_frame;
+	bool			is_animating;
 }	t_ui_anim;
 typedef struct s_game
 {
@@ -71,8 +71,6 @@ typedef struct s_game
 	t_ui_anim		ui;
 }	t_game;
 
-
-
 // Init
 void		init_game_window(t_game *game, char *map_path);
 void		init_map(t_map *map);
@@ -82,6 +80,7 @@ void		init_background(t_game *game);
 
 // Handle_keys
 void		handle_key(mlx_key_data_t keydata, void *param);
+void		handle_mouse_rotation(void *param);
 
 // UI animation
 void		load_ui_frames(t_game *game);

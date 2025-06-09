@@ -6,14 +6,24 @@
 /*   By: ajodar <ajodar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 18:05:30 by ajodar            #+#    #+#             */
-/*   Updated: 2025/06/08 18:28:54 by ajodar           ###   ########.fr       */
+/*   Updated: 2025/06/09 12:52:37 by ajodar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
 
 //20250608
-// Crea la imagen visible y la pone en pantalla
+// Inicializa los valores de animación para luego poder arrancar
+static void	init_ui_anim_state(t_game *game)
+{
+	game->ui.frame_count = 4;
+	game->ui.current_frame = 0;
+	game->ui.is_animating = false;
+}
+
+//20250608
+// Carga la imagen con la ruta de la textura y lo guarda como parte de ui
+// main -> init_game_window -> rc_setup -> load_ui_frames -> create_ui_image
 static void	create_ui_image(t_game *game)
 {
 	int x;
@@ -35,16 +45,8 @@ static void	create_ui_image(t_game *game)
 }
 
 //20250608
-// Inicializa los valores de animación
-static void	init_ui_anim_state(t_game *game)
-{
-	game->ui.frame_count = 4;
-	game->ui.current_frame = 0;
-	game->ui.is_animating = false;
-}
-
-//20250608
-// Carga los PNGs de los frames
+// Carga la ruta de los png de la interfaz
+// main -> init_game_window -> rc_setup -> load_ui_frames -> load_ui_textures
 static void	load_ui_textures(t_game *game)
 {
 	int		i;
@@ -73,6 +75,6 @@ static void	load_ui_textures(t_game *game)
 void	load_ui_frames(t_game *game)
 {
 	load_ui_textures(game);
-	init_ui_anim_state(game);
 	create_ui_image(game);
+	init_ui_anim_state(game);
 }
