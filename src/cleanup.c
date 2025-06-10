@@ -58,8 +58,24 @@ static void	free_map(t_map *map)
 // main -> mlx_key_hook -> handle_key -> cleanup_game
 void	cleanup_game(t_game *game)
 {
+	int i;
+
+	i = 0;
 	if (game->img)
 		mlx_delete_image(game->mlx, game->img);
 	mlx_terminate(game->mlx);
 	free_map(&game->map);
+	if (game->tex_no) mlx_delete_texture(game->tex_no);
+	if (game->tex_so) mlx_delete_texture(game->tex_so);
+	if (game->tex_we) mlx_delete_texture(game->tex_we);
+	if (game->tex_ea) mlx_delete_texture(game->tex_ea);
+	while (i < game->ui.frame_count)
+	{
+		if (game->ui.frames[i])
+			mlx_delete_texture(game->ui.frames[i]);
+		i++;
+	}
+	if (game->ui.img)
+		mlx_delete_image(game->mlx, game->ui.img);
 }
+

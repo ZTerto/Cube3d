@@ -23,7 +23,6 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <string.h>
-# include <math.h>
 
 // Cons
 # define WIDTH 800
@@ -38,7 +37,6 @@ typedef struct s_map {
 	char		*texture_ea;
 	uint32_t	color_floor;
 	uint32_t	color_up;
-
 	char		**complete_map;
 	int			width;
 	int			height;
@@ -53,20 +51,41 @@ typedef struct s_player {
 	double plane_y;
 }	t_player;
 
+typedef struct s_ui_anim {
+	mlx_texture_t	*frames[4];
+	mlx_image_t		*img;
+	int				frame_count;
+	int				current_frame;
+	bool			is_animating;
+}	t_ui_anim;
 typedef struct s_game
 {
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-	t_map		map;
-	t_player	player;
+	mlx_t			*mlx;
+	mlx_image_t		*img;
+	t_map			map;
+	t_player		player;
+	mlx_texture_t	*tex_no;
+	mlx_texture_t	*tex_so;
+	mlx_texture_t	*tex_we;
+	mlx_texture_t	*tex_ea;
+	t_ui_anim		ui;
 }	t_game;
-
 
 // Init
 void		init_game_window(t_game *game, char *map_path);
 void		init_map(t_map *map);
 int			map_setup(t_map *map, char *map_name);
 void		init_player(t_game *game);
+void		init_background(t_game *game);
+
+// Handle_keys
+void		handle_key(mlx_key_data_t keydata, void *param);
+void		handle_mouse_rotation(void *param);
+
+// UI animation
+void		load_ui_frames(t_game *game);
+void		ui_update(void *param);
+void		start_ui_anim(t_game *game);
 
 // Parse
 int			map_parse(t_map *map, char *map_path);

@@ -18,13 +18,20 @@ CUBE3D_FILES = 			src/main.c \
 						src/init.c \
 						src/debug.c \
 						src/cleanup.c \
+						src/handle_keys.c \
+						src/handle_mouse.c \
+						src/ui_animation.c \
+						src/ui_load_frames.c \
 						src/map_setup.c \
 						src/map_parse.c \
 						src/map_parse_utils.c \
 						src/map_validate.c \
 						src/map_validate_utils.c \
 						src/map_floodfill.c \
-						src/map_players.c
+						src/map_players.c \
+						src/rc_setup.c \
+						src/rc_render.c \
+						src/rc_draw.c
 
 GET_NEXT_LINE_FILES = 	src/get_next_line/get_next_line.c\
 						src/get_next_line/get_next_line_utils.c
