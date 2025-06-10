@@ -6,7 +6,7 @@
 /*   By: ajodar <ajodar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 13:00:11 by ajodar            #+#    #+#             */
-/*   Updated: 2025/06/08 14:05:58 by ajodar           ###   ########.fr       */
+/*   Updated: 2025/06/09 19:12:18 by ajodar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct s_ray
 	int		draw_end;
 }	t_ray;
 
+// setup
+void	rc_setup(t_game *game);
 
 // render
 void	render(void *param);
@@ -52,8 +54,7 @@ void	setup_ray(t_ray *ray, t_game *game, int x);
 // draw
 void	draw_column(t_game *game, int x, t_ray *ray);
 
-// setup
-void	rc_setup(t_game *game);
+
 
 
 #endif
