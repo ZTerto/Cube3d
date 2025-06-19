@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/raycasting.h"
+#include "../include/cube3d.h"
 
 //20250608
 // Esta página ha sido practicamente generada por IA para ayudarme a gestionar las animaciones con raycasting
@@ -117,6 +117,7 @@ void	rc_render_frame(t_game *game)
 void	render(void *param)
 {
 	t_game *game = (t_game *)param;
+// mlx_image_t* mlx_put_string(mlx_t* mlx, const char* str, int32_t x, int32_t y);
 
 	rc_render_frame(game);
 }

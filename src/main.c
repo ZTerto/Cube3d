@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
-#include "../include/raycasting.h"
 
 //20250527
 int	main(int argc, char **argv)

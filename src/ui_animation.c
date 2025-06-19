@@ -30,11 +30,13 @@ static void	ui_render_frame(t_game *game)
 	}
 	x = (WIDTH - game->ui.img->width) / 2;
 	y = HEIGHT - game->ui.img->height;
+
 	if (mlx_image_to_window(game->mlx, game->ui.img, x, y) == -1)
 	{
 		fprintf(stderr, "Error: can't animate interface\n");
 		exit(EXIT_FAILURE);
 	}
+	print_counter(game);
 }
 
 //20250608

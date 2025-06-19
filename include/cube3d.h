@@ -13,63 +13,11 @@
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
-# include "MLX42/MLX42.h"
-# include "../src/libft/libft.h"
-# include "../src/get_next_line/get_next_line.h"
-# include <stdlib.h>
-# include <stdio.h>
-# include <stdbool.h>
-# include <math.h>
-# include <fcntl.h>
-# include <unistd.h>
-# include <string.h>
 
-// Cons
-# define WIDTH 800
-# define HEIGHT 600
-# define FOV 60.0
+# include "defines.h"
+# include "structs.h"
 
-// Structs
-typedef struct s_map {
-	char		*texture_no;
-	char		*texture_so;
-	char		*texture_we;
-	char		*texture_ea;
-	uint32_t	color_floor;
-	uint32_t	color_up;
-	char		**complete_map;
-	int			width;
-	int			height;
-}	t_map;
 
-typedef struct s_player {
-	double x;
-	double y;
-	double dir_x;
-	double dir_y;
-	double plane_x;
-	double plane_y;
-}	t_player;
-
-typedef struct s_ui_anim {
-	mlx_texture_t	*frames[4];
-	mlx_image_t		*img;
-	int				frame_count;
-	int				current_frame;
-	bool			is_animating;
-}	t_ui_anim;
-typedef struct s_game
-{
-	mlx_t			*mlx;
-	mlx_image_t		*img;
-	t_map			map;
-	t_player		player;
-	mlx_texture_t	*tex_no;
-	mlx_texture_t	*tex_so;
-	mlx_texture_t	*tex_we;
-	mlx_texture_t	*tex_ea;
-	t_ui_anim		ui;
-}	t_game;
 
 // Init
 void		init_game_window(t_game *game, char *map_path);
@@ -104,5 +52,24 @@ void		free_map_copy(char **map_copy);
 // Debug (Borrar luego)
 void		print_map(t_map *map);
 void		print_map_copy(char **map);
+
+// setup
+void	rc_setup(t_game *game);
+
+// render
+void	render(void *param);
+void	perform_dda(t_ray *ray, t_game *game);
+void	rc_render_frame(t_game *game);
+void	cast_ray(t_game *game, int x);
+void	setup_ray(t_ray *ray, t_game *game, int x);
+
+// draw
+void	draw_column(t_game *game, int x, t_ray *ray);
+
+//counter.c
+void print_counter(void *param);
+void update_fps(t_fps *fps);
+
+
 
 #endif

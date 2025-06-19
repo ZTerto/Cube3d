@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/raycasting.h"
+#include "../include/cube3d.h"
 
 //20250608
 // Esta página ha sido practicamente generada por IA para ayudarme a gestionar las animaciones con raycasting

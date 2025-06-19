@@ -1,89 +1,65 @@
-# Basic setup
 NAME = cube3d
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -fPIE -Iinclude -Ilibs/MLX42-master/include -I/usr/include/GLFW
-CFLAGSSAN = -fsanitize=address -g
+CFLAGSSAN = -fsanitize=address -g3
+# CFLAGS += -fsanitize=address -g3
 
-# Directory variables
 MLX42_DIR = libs/MLX42-master/build
 MLX42_LIB = $(MLX42_DIR)/libmlx42.a
-GLFW_LIB = $(MLX42_DIR)/_deps/glfw-build/src/libglfw3.a
 MLX42_FLAGS = -lglfw -pthread -lm -ldl
 
-# Source Files
-CFILES = $(CUBE3D_FILES) $(GET_NEXT_LINE_FILES) $(LIBFT_FILES)
-OBJS = $(CFILES:.c=.o)
+INCLUDE_FILES = cube3d.h structs.h defines.h
+INCLUDES = $(addprefix include/, $(INCLUDE_FILES))
 
-CUBE3D_FILES = 			src/main.c \
-						src/init.c \
-						src/debug.c \
-						src/cleanup.c \
-						src/handle_keys.c \
-						src/handle_mouse.c \
-						src/ui_animation.c \
-						src/ui_load_frames.c \
-						src/map_setup.c \
-						src/map_parse.c \
-						src/map_parse_utils.c \
-						src/map_validate.c \
-						src/map_validate_utils.c \
-						src/map_floodfill.c \
-						src/map_players.c \
-						src/rc_setup.c \
-						src/rc_render.c \
-						src/rc_draw.c
+CUBE3D_FILES = \
+	main.c init.c debug.c cleanup.c \
+	handle_keys.c handle_mouse.c \
+	ui_animation.c ui_load_frames.c \
+	map_setup.c map_parse.c map_parse_utils.c \
+	map_validate.c map_validate_utils.c map_floodfill.c map_players.c \
+	rc_setup.c rc_render.c rc_draw.c counter.c
 
-GET_NEXT_LINE_FILES = 	src/get_next_line/get_next_line.c\
-						src/get_next_line/get_next_line_utils.c
+GET_NEXT_LINE_FILES = \
+	get_next_line/get_next_line.c \
+	get_next_line/get_next_line_utils.c
 
-LIBFT_FILES =			src/libft/ft_atoi.c\
-						src/libft/ft_itoa.c\
-						src/libft/ft_bzero.c\
-						src/libft/ft_calloc.c\
-						src/libft/ft_isalnum.c\
-						src/libft/ft_isalpha.c\
-						src/libft/ft_isascii.c\
-						src/libft/ft_isdigit.c\
-						src/libft/ft_isprint.c\
-						src/libft/ft_memchr.c\
-						src/libft/ft_memcmp.c\
-						src/libft/ft_memcpy.c\
-						src/libft/ft_memmove.c\
-						src/libft/ft_memset.c\
-						src/libft/ft_strchr.c\
-						src/libft/ft_strncmp.c\
-						src/libft/ft_strdup.c\
-						src/libft/ft_strlcat.c\
-						src/libft/ft_strlcpy.c\
-						src/libft/ft_strlen.c\
-						src/libft/ft_strnstr.c\
-						src/libft/ft_strrchr.c\
-						src/libft/ft_substr.c\
-						src/libft/ft_tolower.c\
-						src/libft/ft_toupper.c\
-						src/libft/ft_putchar_fd.c\
-						src/libft/ft_putendl_fd.c\
-						src/libft/ft_putnbr_fd.c\
-						src/libft/ft_putstr_fd.c\
-						src/libft/ft_split.c\
-						src/libft/ft_strjoin.c\
-						src/libft/ft_striteri.c\
-						src/libft/ft_strtrim.c\
+LIBFT_FILES = \
+	ft_atoi.c ft_itoa.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
+	ft_isascii.c ft_isdigit.c ft_isprint.c ft_memchr.c ft_memcmp.c ft_memcpy.c \
+	ft_memmove.c ft_memset.c ft_strchr.c ft_strncmp.c ft_strdup.c ft_strlcat.c \
+	ft_strlcpy.c ft_strlen.c ft_strnstr.c ft_strrchr.c ft_substr.c ft_tolower.c \
+	ft_toupper.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c \
+	ft_split.c ft_strjoin.c ft_striteri.c ft_strtrim.c
 
+# Add path prefixes
+CUBE3D_SRC = $(addprefix src/, $(CUBE3D_FILES))
+GET_NEXT_LINE_SRC = $(addprefix src/, $(GET_NEXT_LINE_FILES))
+LIBFT_SRC = $(addprefix src/libft/, $(LIBFT_FILES))
+SRC = $(CUBE3D_SRC) $(GET_NEXT_LINE_SRC) $(LIBFT_SRC)
 
-# Build rules
+OBJ_DIR = objs
+OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC))
+
+# Tell make where to find .c sources
+vpath %.c src src/get_next_line src/libft
+
+# Rules
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(MLX42_LIB) $(MLX42_FLAGS) -o $(NAME)
 
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)
 
-re:	fclean all
+re: fclean all
 
 # debug tests
 test: re

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
-#include "../include/raycasting.h"
 
 //20250527
 // Inicia la pantallita de mlx y su ventana
@@ -38,6 +37,24 @@ static void	init_mlx(t_game *game)
 		exit(EXIT_FAILURE);
 	}
 }
+
+void init_fps(t_fps **fps) {
+    struct timeval tv;
+
+    *fps = malloc(sizeof(t_fps));
+    if (!*fps)
+        return;
+
+    (*fps)->current_count = 0;
+    (*fps)->former_count = 0;
+    memset(&(*fps)->current_time, 0, sizeof((*fps)->current_time));
+    memset(&(*fps)->former_time, 0, sizeof((*fps)->former_time));
+
+    gettimeofday(&tv, NULL);
+    (*fps)->former_time.seconds = (uint64_t)tv.tv_sec;
+    (*fps)->former_time.nanoseconds = (uint64_t)tv.tv_usec * 1000;
+}
+
 
 //20250527
 // Busca los colores asignados y pinta el suelo y el cielo
@@ -76,9 +93,11 @@ void	init_background(t_game *game)
 void	init_game_window(t_game *game, char *map_path)
 {
 	map_setup(&game->map, map_path);
-	print_map(&game->map); // Debug temporal
+	//print_map(&game->map);
 	map_validate(&game->map);
 	init_player(game);
+	init_fps(&game->fps);
+	update_fps(game->fps);
 	init_mlx(game);
 	rc_setup(game);
 }

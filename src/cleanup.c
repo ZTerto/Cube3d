@@ -75,7 +75,5 @@ void	cleanup_game(t_game *game)
 			mlx_delete_texture(game->ui.frames[i]);
 		i++;
 	}
-	if (game->ui.img)
-		mlx_delete_image(game->mlx, game->ui.img);
 }
 

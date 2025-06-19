@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
-#include "../include/raycasting.h"
 
 /*
 void handle_mouse(void *param)

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
-#include "../include/raycasting.h"
 
 //20250608
 // Cierra el juego al presionar scape y libera la memoria
