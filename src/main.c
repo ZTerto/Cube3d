@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d.c                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 11:17:52 by marvin            #+#    #+#             */
-/*   Updated: 2025/05/27 11:17:52 by marvin           ###   ########.fr       */
+/*   Updated: 2025/06/20 08:18:02 by alepinto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,3 @@ int	main(int argc, char **argv)
 	mlx_loop(game.mlx);
 	return (EXIT_SUCCESS);
 }
-
-/*
-//20250528
-// main de prueba para ver leaks generados por la librería de Codam
-int main(void)
-{
-	mlx_t *mlx = mlx_init(400, 400, "test", true);
-	mlx_terminate(mlx);
-	return 0;
-}
-*/

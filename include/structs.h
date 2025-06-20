@@ -88,6 +88,13 @@ typedef struct s_player {
 	double dir_y;
 	double plane_x;
 	double plane_y;
+
+	bool key_up;
+    bool key_down;
+    bool key_right;
+    bool key_left;
+	bool key_left_rotate;
+    bool key_right_rotate;
 }	t_player;
 
 typedef struct s_ui_anim {
@@ -97,6 +104,7 @@ typedef struct s_ui_anim {
 	int				current_frame;
 	bool			is_animating;
 }	t_ui_anim;
+
 typedef struct s_game
 {
 	mlx_t			*mlx;

@@ -28,8 +28,8 @@ static void	ui_render_frame(t_game *game)
 		fprintf(stderr, "Error: can't animate interface\n");
 		exit(EXIT_FAILURE);
 	}
-	x = (WIDTH - game->ui.img->width) / 2;
-	y = HEIGHT - game->ui.img->height;
+	x = (WIN_WIDTH - game->ui.img->width) / 2;
+	y = WIN_HEIGHT - game->ui.img->height;
 
 	if (mlx_image_to_window(game->mlx, game->ui.img, x, y) == -1)
 	{
@@ -40,19 +40,19 @@ static void	ui_render_frame(t_game *game)
 }
 
 //20250608
-// Actualiza frame a frame la animación con breve delay cuando se activa
+// Actualiza frame a frame la animación con breve current_delay cuando se activa
 // main -> mlx_loop_hook -> ui_update
 void	ui_update(void *param)
 {
 	t_game *game = (t_game *)param;
-	static int delay = 0;
+	static int current_delay = 0;
 
 	if (!game->ui.is_animating)
 		return;
-	delay++;
-	if (delay < 10)
+	current_delay++;
+	if (current_delay < DELAY)
 		return;
-	delay = 0;
+	current_delay = 0;
 	game->ui.current_frame++;
 	if (game->ui.current_frame >= game->ui.frame_count)
 	{

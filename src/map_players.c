@@ -19,14 +19,14 @@ static void	set_player_direction_vertical(t_player *p, char dir)
 	{
 		p->dir_x = 0;
 		p->dir_y = -1;
-		p->plane_x = 0.66;
+		p->plane_x = PLANE_LENGHT;
 		p->plane_y = 0;
 	}
 	else if (dir == 'S')
 	{
 		p->dir_x = 0;
 		p->dir_y = 1;
-		p->plane_x = -0.66;
+		p->plane_x = -PLANE_LENGHT;
 		p->plane_y = 0;
 	}
 }
@@ -39,14 +39,14 @@ static void	set_player_direction_horizontal(t_player *p, char dir)
 		p->dir_x = 1;
 		p->dir_y = 0;
 		p->plane_x = 0;
-		p->plane_y = 0.66;
+		p->plane_y = PLANE_LENGHT;
 	}
 	else if (dir == 'W')
 	{
 		p->dir_x = -1;
 		p->dir_y = 0;
 		p->plane_x = 0;
-		p->plane_y = -0.66;
+		p->plane_y = -PLANE_LENGHT;
 	}
 }
 

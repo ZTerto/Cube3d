@@ -17,13 +17,13 @@
 // main -> init_game_window -> init_mlx
 static void	init_mlx(t_game *game)
 {
-	game->mlx = mlx_init(WIDTH, HEIGHT, "Terto3D", true);
+	game->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Terto3D", true);
 	if (!game->mlx)
 	{
 		fprintf(stderr, "Error: mlx_init failed\n");
 		exit(EXIT_FAILURE);
 	}
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	game->img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!game->img)
 	{
 		mlx_terminate(game->mlx);
@@ -66,14 +66,14 @@ void	init_background(t_game *game)
 	int			y;
 
 	y = 0;
-	while (y < HEIGHT)
+	while (y < WIN_HEIGHT)
 	{
 		int x = 0;
-		if (y < HEIGHT / 2)
+		if (y < WIN_HEIGHT / 2)
 			color = game->map.color_up;
 		else
 			color = game->map.color_floor;
-		while (x < WIDTH)
+		while (x < WIN_WIDTH)
 		{
 			mlx_put_pixel(game->img, x, y, color);
 			x++;

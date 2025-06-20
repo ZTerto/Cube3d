@@ -117,7 +117,7 @@ void	rc_render_frame(t_game *game)
 void	render(void *param)
 {
 	t_game *game = (t_game *)param;
-// mlx_image_t* mlx_put_string(mlx_t* mlx, const char* str, int32_t x, int32_t y);
 
+	
 	rc_render_frame(game);
 }
