@@ -6,6 +6,18 @@
 #define PLANE_LENGHT 0.66
 #define DELAY 10
 
+// Teclas
+#define KEY_LEFT 65361
+#define KEY_RIGHT 65363
+
+#define KEY_A 97
+#define KEY_S 115
+#define KEY_D 100
+#define KEY_W 119
+#define KEY_ESC 65307
+
+#define PI 3.14169
+
 // CONTADOR
 # define COUNTER_POS_X 5
 # define COUNTER_POS_Y 10
@@ -19,7 +31,7 @@
 # define MENU_WIDTH 50
 # define MENU_HEIGHT 70
 // TAMAÑO VENTANA
-# define WIN_WIDTH 800
+# define WIN_WIDTH 900
 # define WIN_HEIGHT 600
 
 # define CONTROL_W_MSG "Para avanzar pulsa la w"

@@ -27,8 +27,8 @@ void		init_player(t_game *game);
 void		init_background(t_game *game);
 
 // Handle_keys
-void		handle_key(mlx_key_data_t keydata, void *param);
-void		handle_mouse_rotation(void *param);
+void        handle_key_press(mlx_key_data_t keydata, void *param);
+void        handle_key_release(mlx_key_data_t keydata, void *param);
 
 // UI animation
 void		load_ui_frames(t_game *game);

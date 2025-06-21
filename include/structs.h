@@ -37,7 +37,6 @@ typedef struct s_fps {
     t_time_interval current_time;
     int former_count;
     t_time_interval former_time;
-    char msg[FPS_MSG_SIZE];
 } t_fps;
 
 

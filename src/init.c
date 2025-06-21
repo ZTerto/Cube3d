@@ -68,16 +68,14 @@ void	init_background(t_game *game)
 	y = 0;
 	while (y < WIN_HEIGHT)
 	{
-		int x = 0;
 		if (y < WIN_HEIGHT / 2)
 			color = game->map.color_up;
 		else
 			color = game->map.color_floor;
-		while (x < WIN_WIDTH)
-		{
+
+		int x = -1;
+		while (++x < WIN_WIDTH)
 			mlx_put_pixel(game->img, x, y, color);
-			x++;
-		}
 		y++;
 	}
 }

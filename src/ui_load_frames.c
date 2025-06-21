@@ -35,8 +35,8 @@ static void	create_ui_image(t_game *game)
 		fprintf(stderr, "Error: creating interface\n");
 		exit(EXIT_FAILURE);
 	}
-	x = (WIDTH - game->ui.img->width) / 2;
-	y = HEIGHT - game->ui.img->height;
+	x = (WIN_WIDTH - game->ui.img->width) / 2;
+	y = WIN_HEIGHT - game->ui.img->height;
 	if (mlx_image_to_window(game->mlx, game->ui.img, x, y) == -1)
 	{
 		fprintf(stderr, "Error: creating interface\n");

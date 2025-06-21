@@ -72,10 +72,6 @@ void print_counter(void *param) {
 
     elapsed_ms = (long)(fps->current_time.seconds - fps->former_time.seconds) * 1000L +
                  (long)(fps->current_time.nanoseconds - fps->former_time.nanoseconds) / 1000000L;
-    // printf("diff_seconds: %ld\n", (long)(((t_fps *)game->fps)->current_time.seconds - ((t_fps *)game->fps)->former_time.seconds));
-    // printf("diff_nanoseconds: %ld\n", (long)(((t_fps *)game->fps)->current_time.nanoseconds - ((t_fps *)game->fps)->former_time.nanoseconds));
-    // printf("diff_seconds_ms: %ld\n", (long)(((t_fps *)game->fps)->current_time.seconds - ((t_fps *)game->fps)->former_time.seconds) * 1000L);
-    // printf("diff_nanoseconds_ms: %ld\n", (long)(((t_fps *)game->fps)->current_time.nanoseconds - ((t_fps *)game->fps)->former_time.nanoseconds) / 1000000L);
     update_fps(fps);
 
     if (elapsed_ms == 0) elapsed_ms = 1; // Evitar división por cero
@@ -85,14 +81,7 @@ void print_counter(void *param) {
     char *buf = malloc(FPS_MSG_SIZE);
     if (!buf)
         return;
-
     snprintf(buf, FPS_MSG_SIZE, "FPS: %d", fps_value);
-    // printf("diff_seconds: %ld\n", (long)(((t_fps *)game->fps)->current_time.seconds - ((t_fps *)game->fps)->former_time.seconds));
-    // printf("diff_nanoseconds: %ld\n", (long)(((t_fps *)game->fps)->current_time.nanoseconds - ((t_fps *)game->fps)->former_time.nanoseconds));
-    // printf("diff_seconds_ms: %ld\n", (long)(((t_fps *)game->fps)->current_time.seconds - ((t_fps *)game->fps)->former_time.seconds) * 1000L);
-    // printf("diff_nanoseconds_ms: %ld\n", (long)(((t_fps *)game->fps)->current_time.nanoseconds - ((t_fps *)game->fps)->former_time.nanoseconds) / 1000000L);
-    //printf("buf: %s\n", buf);
-
     mlx_put_string(game->mlx, buf, COUNTER_POS_X, COUNTER_POS_Y);
     free(buf);
 }
